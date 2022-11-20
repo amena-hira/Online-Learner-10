@@ -6,7 +6,6 @@ import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextPr
 import './Login.css';
 import { FaGoogle } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa';
-import { GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
     const {mode, login, setLoading, signInWithGoogle, signInWithGithub} = useContext(ModeAuthContext);

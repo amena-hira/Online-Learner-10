@@ -12,6 +12,8 @@ const ModeAuthContextProvider = ({children}) => {
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
 
+    const [coursePDF, setCoursePDF] = useState({});
+
     const toggleMode = () => {
         if (mode === "light") {
           setMode("dark");
@@ -65,6 +67,8 @@ const ModeAuthContextProvider = ({children}) => {
         mode,
         loading,
         setLoading,
+        coursePDF,
+        setCoursePDF,
         user,
         toggleMode,
         signIn,

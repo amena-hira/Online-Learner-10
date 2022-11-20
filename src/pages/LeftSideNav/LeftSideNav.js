@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import ListGroup from 'react-bootstrap/ListGroup';
 import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
 
 const LeftSideNav = ({course}) => {
