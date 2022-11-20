@@ -6,19 +6,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { ModeAuthContext } from '../../../context/ModeAuthContext/ModeAuthContextProvider';
 import logo from '../../../Images/logo.jpg';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 
 
 
 const Header = () => {
     const {mode, toggleMode, user, logOut} = useContext(ModeAuthContext);
 
-    const renderTooltip = (props) => (
-        <Tooltip id="button-tooltip" {...props}>
-          {user?.displayName}
-        </Tooltip>
-    );
+    
     const handleLogOut = () =>{
         logOut()
         .then(() => {})
@@ -46,13 +40,7 @@ const Header = () => {
                         user?.photoURL?
                         <>
                             <div className='my-auto'>
-                                <OverlayTrigger
-                                    placement="bottom"
-                                    delay={{ show: 250, hide: 400 }}
-                                    overlay={renderTooltip}
-                                >
-                                    <Image className='border rounded-circle' src={user.photoURL} style={{height:'50px'}}></Image>
-                                </OverlayTrigger>
+                                <Image className='border rounded-circle' src={user.photoURL} style={{height:'50px'}} data-bs-toggle="tooltip" data-bs-placement="bottom" title={user.displayName}></Image>
                             </div>
                             <Link onClick={handleLogOut} className='nav-link me-1'>Logout</Link>
                         </>
