@@ -27,7 +27,7 @@ const Home = () => {
                         <Row xs={1} md={2} className="g-4">
                             
                                 {Array.from({ length: 1 }).map((_, idx) => (
-                                    courses.map(course => <CourseCard course={course}></CourseCard>)
+                                    courses.map(course => <CourseCard key={course.id} course={course}></CourseCard>)
                                 ))}
                             
                             
