@@ -63,6 +63,8 @@ const ModeAuthContextProvider = ({children}) => {
 
     const modeAuthInfo = {
         mode,
+        loading,
+        setLoading,
         user,
         toggleMode,
         signIn,

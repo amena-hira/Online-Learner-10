@@ -1,7 +1,7 @@
 import React,{useContext, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
 import './Login.css';
 import { FaGoogle } from 'react-icons/fa';
@@ -9,9 +9,13 @@ import { FaGithub } from 'react-icons/fa';
 import { GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
-    const {mode, login, signInWithGoogle, signInWithGithub} = useContext(ModeAuthContext);
+    const {mode, login, setLoading, signInWithGoogle, signInWithGithub} = useContext(ModeAuthContext);
     const navigate = useNavigate();
     const [error, setError] = useState('');
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+    console.log(from);
 
     const handleLogin = (event) =>{
         event.preventDefault();
@@ -21,14 +25,15 @@ const Login = () => {
         console.log(email, password);
         login(email, password)
         .then(result =>{
-            const user = result.user;
-            // console.log(user);
             form.reset();
-            navigate('/');
+            navigate(from, {replace:true});
         })
         .catch(error =>{
             setError(error.message);
             console.log(error);
+        })
+        .finally(() =>{
+            setLoading(false);
         })
     }
 
@@ -42,6 +47,9 @@ const Login = () => {
         .catch(error =>{
             console.log(error);
         })
+        .finally(() =>{
+            setLoading(false);
+        })
     }  
     const handleLogInWithGithub = () =>{
         signInWithGithub()
@@ -53,6 +61,9 @@ const Login = () => {
         .catch(error =>{
             
             console.log(error);
+        })
+        .finally(() =>{
+            setLoading(false);
         })
     }
 
