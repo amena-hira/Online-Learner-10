@@ -12,13 +12,18 @@ import Tooltip from 'react-bootstrap/Tooltip';
 
 
 const Header = () => {
-    const {mode, toggleMode, user} = useContext(ModeAuthContext);
+    const {mode, toggleMode, user, logOut} = useContext(ModeAuthContext);
 
     const renderTooltip = (props) => (
         <Tooltip id="button-tooltip" {...props}>
           {user?.displayName}
         </Tooltip>
     );
+    const handleLogOut = () =>{
+        logOut()
+        .then(() => {})
+        .catch(() => {})
+    }
     
     return (
         <Navbar collapseOnSelect expand="lg" bg={mode} variant={mode} className='mb-3'>
@@ -46,10 +51,10 @@ const Header = () => {
                                     delay={{ show: 250, hide: 400 }}
                                     overlay={renderTooltip}
                                 >
-                                    <Image src={user.photoURL} style={{height:'50px'}} alt='User Image'></Image>
+                                    <Image className='border rounded-circle' src={user.photoURL} style={{height:'50px'}}></Image>
                                 </OverlayTrigger>
                             </div>
-                            <Link to='/login' className='nav-link me-1'>Logout</Link>
+                            <Link onClick={handleLogOut} className='nav-link me-1'>Logout</Link>
                         </>
                         :
                         <Link to='/login' className='nav-link me-1'>Login</Link>

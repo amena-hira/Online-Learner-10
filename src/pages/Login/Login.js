@@ -4,9 +4,12 @@ import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
 import './Login.css';
+import { FaGoogle } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
+import { GithubAuthProvider } from "firebase/auth";
 
 const Login = () => {
-    const {mode, login} = useContext(ModeAuthContext);
+    const {mode, login, signInWithGoogle, signInWithGithub} = useContext(ModeAuthContext);
     const navigate = useNavigate();
 
     const handleLogin = (event) =>{
@@ -18,7 +21,7 @@ const Login = () => {
         login(email, password)
         .then(result =>{
             const user = result.user;
-            console.log(user);
+            // console.log(user);
             form.reset();
             navigate('/');
         })
@@ -26,11 +29,51 @@ const Login = () => {
             console.log(error);
         })
     }
+
+    const handleLogInWithGoogle = () =>{
+        signInWithGoogle()
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            navigate('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+    }  
+    const handleLogInWithGithub = () =>{
+        signInWithGithub()
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            navigate('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+    }
+
+
     return (
         <div className={`container d-flex text-${mode==='light'?'dark':'light'} `}>
             
             <div className={`m-auto shadow-lg p-5 mb-5 bg-${mode==='dark'?'dark':'light'} rounded form-width`}>
-                <h2 className='text-center mb-4'>Login</h2>
+
+                <h3 className='text-center mb-3'>Login</h3>
+                <div className='mb-3'>
+                    <div className='d-flex justify-content-center'>
+                        <div onClick={handleLogInWithGoogle} className='border rounded px-3 pb-1 me-2'>
+                            <FaGoogle className='text-success'></FaGoogle>
+                        </div>
+                        <div onClick={handleLogInWithGithub} className='border rounded px-3 pb-1 '>
+                            <FaGithub></FaGithub>
+                        </div>   
+                    </div>
+                </div>
+
+                <p className='text-center mb-1'>or</p>
+                <h6 className='text-center mb-2'>Login with Email</h6>
+
                 <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
@@ -48,6 +91,8 @@ const Login = () => {
                     </div>
                     
                 </Form>
+                
+                
                 <div className='text-center mt-5 '>
                     <p className='mb-0'> Don't have an account?</p>
                     <Link className=' btn text-primary pt-0' to='/register'>Register</Link>

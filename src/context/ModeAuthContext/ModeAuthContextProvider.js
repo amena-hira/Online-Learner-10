@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "firebase/auth";
 import app from '../../firebase/firebase.config';
 
 export const ModeAuthContext = createContext();
@@ -9,6 +9,8 @@ const ModeAuthContextProvider = ({children}) => {
     const [mode, setMode] = useState('light');
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
     const toggleMode = () => {
         if (mode === "light") {
@@ -27,9 +29,23 @@ const ModeAuthContextProvider = ({children}) => {
         setLoading(true);
         return signInWithEmailAndPassword( auth, email, password );
     }
+    const signInWithGoogle = () =>{
+        return signInWithPopup(auth, googleProvider);
+    }
+    const signInWithGithub = () =>{
+        return signInWithPopup(auth, githubProvider);
+    }
+    const logOut = () =>{
+        setUser(null);
+        return signOut(auth);
+    }
+
+
+
     const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
     }
+    
 
 
 
@@ -50,8 +66,11 @@ const ModeAuthContextProvider = ({children}) => {
         user,
         toggleMode,
         signIn,
+        signInWithGoogle,
+        signInWithGithub,
         updateUserProfile,
         login,
+        logOut,
     }
     return (
         <ModeAuthContext.Provider value={modeAuthInfo}>
