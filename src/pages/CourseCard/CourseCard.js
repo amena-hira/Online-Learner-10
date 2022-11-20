@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
 
 const CourseCard = ({course}) => {
-    const {id, name, img, details} = course;
+    const {mode} =useContext(ModeAuthContext);
+    const {id, name, img} = course;
     return (
         
-        <Col>
-            <Card>
-                <Card.Img variant="top" src={img} />
-                <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Card.Text>
-                    {details}
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-            </Card>
-        </Col>
+        
+            <Col>
+                <Link to={`/course/${id}`} className={`card bg-${mode} text-${mode==='light'?'dark':'light'}`} style={{textDecoration: 'none'}}>
+                    <Card.Img variant="top" src={img} style={{height:'250px'}}/>
+                    <Card.Body>
+                    <Card.Title className='text-center'>{name}</Card.Title>
+                    
+                    </Card.Body>
+                </Link>
+            </Col>
+       
             
     );
 };

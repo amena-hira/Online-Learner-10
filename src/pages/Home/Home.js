@@ -12,10 +12,10 @@ const Home = () => {
     const courses = useLoaderData();
     console.log(courses);
     return (
-        <div>
+        <div className='mb-5'>
             <Container>
                 <Row>
-                    <Col lg="4">
+                    <Col lg="4" className='mb-2'>
                         <ListGroup>
                             {
                                 courses.map(course => <LeftSideNav key={course.id} course={course}></LeftSideNav>)
@@ -25,9 +25,12 @@ const Home = () => {
                     </Col>
                     <Col lg="8">
                         <Row xs={1} md={2} className="g-4">
-                            {Array.from({ length: courses.length }).map((_, idx) => (
-                                courses.map(course => <CourseCard course={course}></CourseCard>)
-                            ))}
+                            
+                                {Array.from({ length: 1 }).map((_, idx) => (
+                                    courses.map(course => <CourseCard course={course}></CourseCard>)
+                                ))}
+                            
+                            
                         </Row>
                     </Col>
                 </Row>
