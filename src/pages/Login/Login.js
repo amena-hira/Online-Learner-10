@@ -1,40 +1,56 @@
 import React,{useContext} from 'react';
-import { Image } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
+import './Login.css';
 
 const Login = () => {
-    const {mode} = useContext(ModeAuthContext)
+    const {mode, login} = useContext(ModeAuthContext);
+    const navigate = useNavigate();
+
+    const handleLogin = (event) =>{
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        login(email, password)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            form.reset();
+            navigate('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+    }
     return (
-        <div className={`container d-flex text-${mode==='light'?'dark':'light'}`}>
+        <div className={`container d-flex text-${mode==='light'?'dark':'light'} `}>
             
-            <div className={`m-auto shadow-lg p-5 mb-5 bg-${mode==='dark'?'dark':'light'} rounded`}>
+            <div className={`m-auto shadow-lg p-5 mb-5 bg-${mode==='dark'?'dark':'light'} rounded form-width`}>
                 <h2 className='text-center mb-4'>Login</h2>
-                <Form >
+                <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                        </Form.Text>
+                        <Form.Control name='email' type="email" placeholder="Enter email" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control name='password' type="password" placeholder="Password" />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <div className='text-center'>
+                        <Button className='w-100' variant="primary" type="submit">
                         Submit
-                    </Button>
+                        </Button>
+                    </div>
+                    
                 </Form>
-                <div className='text-center mt-5 pt-3'>
+                <div className='text-center mt-5 '>
                     <p className='mb-0'> Don't have an account?</p>
-                    <Link className=' btn text-primary'>Sign Up</Link>
+                    <Link className=' btn text-primary pt-0' to='/register'>Register</Link>
                 </div>
                 
             </div>
