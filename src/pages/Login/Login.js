@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { GithubAuthProvider } from "firebase/auth";
 const Login = () => {
     const {mode, login, signInWithGoogle, signInWithGithub} = useContext(ModeAuthContext);
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     const handleLogin = (event) =>{
         event.preventDefault();
@@ -26,6 +27,7 @@ const Login = () => {
             navigate('/');
         })
         .catch(error =>{
+            setError(error.message);
             console.log(error);
         })
     }
@@ -49,6 +51,7 @@ const Login = () => {
             navigate('/');
         })
         .catch(error =>{
+            
             console.log(error);
         })
     }
@@ -89,6 +92,9 @@ const Login = () => {
                         Submit
                         </Button>
                     </div>
+                    <Form.Text className="text-danger">
+                        {error}
+                    </Form.Text>
                     
                 </Form>
                 
