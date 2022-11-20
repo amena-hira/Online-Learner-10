@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import './CourseDetails.css'
 import { ModeAuthContext } from '../../context/ModeAuthContext/ModeAuthContextProvider';
+import Button from 'react-bootstrap/Button';
 
 const CourseDetails = () => {
     const {mode} = useContext(ModeAuthContext);
     const course = useLoaderData();
     console.log(course);
-    const { name, img, details } = course;
+    const { id, name, img, details } = course;
     return (
         <div className='container d-flex'>
             <div className='mx-auto card-width'>
@@ -19,23 +20,10 @@ const CourseDetails = () => {
                         <Card.Text>
                             {details}
                         </Card.Text>
+                        <Link to={`/checkout/${id}`} className='btn btn-primary' >Get Premium Access</Link>
                     </Card.Body>
                 </Card>
             </div>
-            {/* <div class="card mb-3 mx-auto" >
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src={img} class="img-fluid rounded-start" alt="..."/>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Course Name: {name}</h5>
-                            <p class="card-text">{details}</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 };
