@@ -16,12 +16,12 @@ export const routes = createBrowserRouter([
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/categories'),
+                loader: () => fetch('https://course-firebase-app-server.vercel.app/categories'),
                 element: <Home></Home> 
             },
             {
                 path: '/course/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`),
+                loader: ({params}) => fetch(`https://course-firebase-app-server.vercel.app/courses/${params.id}`),
                 element: <CourseDetails></CourseDetails>
              },
             {
@@ -38,7 +38,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`),
+                loader: ({params}) => fetch(`https://course-firebase-app-server.vercel.app/courses/${params.id}`),
                 element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>
             },
         ]

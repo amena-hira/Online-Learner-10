@@ -1,5 +1,5 @@
 # Project Name - "Online Learner"
-# Live Site Link - "https://subtle-tiramisu-709821.netlify.app/"
+# Live Site Link - "https://course-firebase-app-4e972.web.app/"
 # Features
 
 * Anyone can choose courses
