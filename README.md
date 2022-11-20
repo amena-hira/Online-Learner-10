@@ -1,3 +1,20 @@
+# Project Name - "Online Learner"
+# Live Site Link - "https://subtle-tiramisu-709821.netlify.app/"
+# Features
+
+* Anyone can choose courses
+* Can check the course details
+* Can download the course details
+* Also get the premium account feel with login
+* Can login through Google & Github login system
+* Project is created by using -
+    * react-bootstrap
+    * react framework
+    * express js for server
+    * firebase for authentication
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

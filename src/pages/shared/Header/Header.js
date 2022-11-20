@@ -24,7 +24,7 @@ const Header = () => {
             <Container>
                 <Navbar.Brand href="#home">
                     <Image className='me-2' src={logo} style={{height:'50px',width:'50px'}} roundedCircle></Image>
-                    PL Learning</Navbar.Brand>
+                    Online Learner</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mx-auto">

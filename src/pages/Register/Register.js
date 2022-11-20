@@ -49,11 +49,11 @@ const Register = () => {
                 <Form onSubmit={handleSignIn}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Your Full Name</Form.Label>
-                        <Form.Control type="text" name='name' placeholder="Enter email" required/>
+                        <Form.Control type="text" name='name' placeholder="Enter Your Full Name" required/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Photo URL</Form.Label>
-                        <Form.Control type="text" name='photoURL' placeholder="Enter email" required/>
+                        <Form.Control type="text" name='photoURL' placeholder="Enter Photo URL" required/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
