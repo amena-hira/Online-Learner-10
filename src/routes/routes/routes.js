@@ -4,6 +4,7 @@ import Blog from "../../pages/Blog/Blog";
 import CourseDetails from "../../pages/CourseDetails/CourseDetails";
 import Home from "../../pages/Home/Home";
 import Login from "../../pages/Login/Login";
+import NotFound from "../../pages/NotFound/NotFound";
 import Register from "../../pages/Register/Register";
 
 export const routes = createBrowserRouter([
@@ -32,7 +33,11 @@ export const routes = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register> 
-            },
+            }
         ]
+    },
+    {
+        path: '*',
+        element: <NotFound></NotFound>
     }
 ])
